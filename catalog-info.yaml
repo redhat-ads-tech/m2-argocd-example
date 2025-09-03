@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: httpsink
+  title: HTTP Sink Application
+  description: A simple HTTP sink application for testing and debugging HTTP requests
+  annotations:
+    argocd/app-selector: backstage.io/app=httpsink
+    backstage.io/source-location: url:https://github.com/redhat-ads-tech/m2-argocd-example
+  labels:
+    backstage.io/app: httpsink
+  tags:
+    - http
+    - sink
+    - testing
+    - openshift
+spec:
+  type: service
+  lifecycle: experimental
+  owner: platform-team
+  system: testing-tools

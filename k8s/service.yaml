@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpsink
+  namespace: httpsink
+  labels:
+    app: httpsink
+    app.kubernetes.io/name: httpsink
+    app.kubernetes.io/component: web
+spec:
+  selector:
+    app: httpsink
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP
