@@ -6,7 +6,7 @@ metadata:
   description: A simple HTTP sink application for testing and debugging HTTP requests
   annotations:
     argocd/app-selector: backstage.io/app=httpsink
-    backstage.io/source-location: url:https://github.com/redhat-ads-tech/m2-argocd-example
+    backstage.io/source-location: url:.
   labels:
     backstage.io/app: httpsink
   tags:
