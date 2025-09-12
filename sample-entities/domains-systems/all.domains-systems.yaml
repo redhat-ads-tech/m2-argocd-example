@@ -4,7 +4,8 @@ kind: Domain
 metadata:
   name: retail-banking
   description: Services for individual consumers, such as savings, checking, and personal loans.
-spec: {}
+spec:
+  owner: customer-experience-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -35,7 +36,8 @@ kind: Domain
 metadata:
   name: corporate-banking
   description: Financial services for businesses, including credit lines, corporate accounts, and treasury management.
-spec: {}
+spec:
+  owner: customer-experience-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -66,7 +68,8 @@ kind: Domain
 metadata:
   name: payments-transfers
   description: Handles real-time payments, wire transfers, direct debits, SEPA payments, and ACH transactions.
-spec: {}
+spec:
+  owner: payments-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -95,9 +98,10 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
-  name: open-banking-apis
+  name: open-banking-team
   description: API platform for third-party banking services under PSD2, FDX, and CFPB 1033 compliance.
-spec: {}
+spec:
+  owner: open-banking-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -105,7 +109,7 @@ metadata:
   name: open-banking-api-hub
   description: API gateway for third-party integrations.
 spec:
-  owner: open-banking-apis
+  owner: open-banking-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -113,7 +117,7 @@ metadata:
   name: consent-management-service
   description: Manages customer consents for data sharing.
 spec:
-  owner: open-banking-apis
+  owner: open-banking-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -121,14 +125,15 @@ metadata:
   name: third-party-payment-processor
   description: Enables third-party providers to initiate payments.
 spec:
-  owner: open-banking-apis
+  owner: open-banking-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
   name: risk-compliance
   description: Covers fraud detection, KYC, AML, and regulatory reporting.
-spec: {}
+spec:
+  owner: open-banking-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -159,7 +164,8 @@ kind: Domain
 metadata:
   name: core-banking-ledger
   description: The backbone of banking, handling account balances, transactions, and settlements.
-spec: {}
+spec:
+  owner: open-banking-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
