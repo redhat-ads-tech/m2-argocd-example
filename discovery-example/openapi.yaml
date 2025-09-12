@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: Anything Echo API
+  version: 1.0.0
+  description: |
+    Accepts any path and common HTTP methods, echoes request metadata.
+    Note: OpenAPI does not support a true greedy wildcard path; this spec
+    defines "/" and "/{path}" to approximate "any path". Many gateways
+    will route deeper paths through a single templated segment.
+servers:
+  - url: https://api.example.com
+paths:
+  /:
+    get: &anyOp
+      summary: Echo (GET)
+      description: Echoes request metadata.
+      responses: &echoResponses
+        "200":
+          description: Echo payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EchoResponse"
+    delete: *anyOp
+    head: *anyOp
+    options: *anyOp
+    trace: *anyOp
+    post: &anyOpWithBody
+      summary: Echo (POST)
+      description: Echoes request metadata.
+      requestBody: &anyBody
+        description: Accept any request body
+        required: false
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                - type: array
+                - type: string
+                - type: number
+                - type: boolean
+                - type: "null"
+          text/plain:
+            schema:
+              type: string
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+          "*/*":
+            schema:
+              oneOf:
+                - type: string
+                - type: object
+                - type: array
+      responses: *echoResponses
+    put: *anyOpWithBody
+    patch: *anyOpWithBody
+  /{path}:
+    parameters:
+      - name: path
+        in: path
+        required: true
+        description: |
+          Arbitrary path segment. Gateways often forward the remainder of
+          the URL to this route so it acts like a wildcard.
+        schema:
+          type: string
+        allowReserved: true
+    get: *anyOp
+    delete: *anyOp
+    head: *anyOp
+    options: *anyOp
+    trace: *anyOp
+    post: *anyOpWithBody
+    put: *anyOpWithBody
+    patch: *anyOpWithBody
+components:
+  schemas:
+    EchoResponse:
+      type: object
+      required:
+        - ip
+        - method
+        - url
+        - uuid
+        - recv
+        - resp
+        - bodyBytesSize
+        - totalBytesSize
+        - hostname
+        - version
+      properties:
+        ip:
+          type: string
+          description: Client IP from X-Forwarded-For or socket remote address.
+          example: 203.0.113.42
+        method:
+          type: string
+          description: HTTP method used.
+          example: POST
+        url:
+          type: string
+          description: The full request URL seen by the server.
+          example: /foo/bar?x=1
+        uuid:
+          type: string
+          description: Server-generated request UUID.
+          format: uuid
+          example: "9d5b2f1d-4c3f-4a82-a2f9-8b2a0b6f7e3c"
+        recv:
+          type: string
+          format: date-time
+          description: ISO-8601 timestamp when the request was received.
+          example: "2025-09-12T03:21:34.567Z"
+        resp:
+          type: string
+          format: date-time
+          description: ISO-8601 timestamp when the response was sent.
+          example: "2025-09-12T03:21:34.789Z"
+        bodyBytesSize:
+          type: integer
+          format: int64
+          description: Number of bytes read from the request body.
+          example: 128
+        totalBytesSize:
+          type: integer
+          format: int64
+          description: Total bytes read on the socket (e.g., headers + body).
+          example: 512
+        hostname:
+          type: string
+          description: Hostname of the server handling the request.
+          example: "ip-10-0-1-23"
+        version:
+          type: string
+          description: Server version string.
+          example: "1.2.3"

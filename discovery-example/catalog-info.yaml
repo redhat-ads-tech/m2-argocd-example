@@ -1,3 +1,4 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -17,3 +18,22 @@ spec:
   type: service
   lifecycle: experimental
   owner: tssc
+  providesApis:
+    - httpsink-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: httpsink-api
+  title: HTTP Sink API
+  description: Echoes request metadata for any path & method.
+  tags:
+    - echo
+    - proxy
+    - openapi
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: tssc
+  definition:
+    $text: ./openapi.yaml
