@@ -6,7 +6,7 @@ metadata:
   description: A simple HTTP sink application for testing and debugging HTTP requests
   annotations:
     argocd/app-selector: backstage.io/app=httpsink
-    backstage.io/source-location: url:.
+    backstage.io/source-location: .
   labels:
     backstage.io/app: httpsink
   tags:
@@ -17,5 +17,4 @@ metadata:
 spec:
   type: service
   lifecycle: experimental
-  owner: platform-team
-  system: testing-tools
+  owner: tssc
